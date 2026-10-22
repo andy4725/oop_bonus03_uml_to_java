@@ -16,7 +16,7 @@ public abstract class Szemely {
         if(ertek.isBlank()) {
             throw new IllegalArgumentException(mezo + " nem lehet ures.");
         }
-        return ertek.trim;
+        return ertek.trim();
     }
 
     public String getAzonosito() {
