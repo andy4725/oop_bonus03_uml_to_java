@@ -1,0 +1,57 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+abstract class Szemely {
+  - azonosito: String
+  - nev: String
+  - email: String
+  + equals(Object): boolean
+  + hashCode(): int
+}
+
+class Hallgato {
+  - beiratkozasok: List<Beiratkozas>
+  + getSulyozottAtlag(): double
+  + getOsszesMegszerzettKredit(): int
+}
+
+class Oktato {
+  - kurzusok: List<Kurzus>
+  + getOktatottKreditekOsszege(): int
+}
+
+class Kurzus {
+  - kod: String
+  - nev: String
+  - kredit: int
+  - maximalisLetszam: int
+  + beiratkozik(Hallgato, Felev): Beiratkozas
+  + getAtmenesiArany(): double
+  + getLegjobbHaromHallgato(): List<Hallgato>
+}
+
+class Beiratkozas {
+  - felev: Felev
+  - jegy: Jegy [0..1]
+}
+
+record Felev {
+  + ev: int
+  + szam: int
+}
+
+record Jegy {
+  + ertek: int
+}
+
+Szemely <|-- Hallgato
+Szemely <|-- Oktato
+
+Hallgato "1" *-- "0..*" Beiratkozas : birtokolja
+Kurzus "1" *-- "0..*" Beiratkozas : kezeli
+Oktato "1" o-- "0..*" Kurzus : tanítja
+Beiratkozas "0..*" --> "1" Hallgato
+Beiratkozas "0..*" --> "1" Kurzus
+Beiratkozas "0..*" --> "1" Felev
+Beiratkozas "0..*" --> "0..1" Jegy
+@enduml

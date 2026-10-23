@@ -2,7 +2,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.Comparator;
 
 public final class Kurzus {
@@ -78,7 +77,7 @@ public final class Kurzus {
         return beiratkozasok.stream()
                 .filter(b -> b.getJegy().isPresent())
                 .sorted(Comparator.comparingInt(
-                        (Beiratkozas b) -> b.getJegy().orElseThrow().getErtek()
+                        (Beiratkozas b) -> b.getJegy().orElseThrow().ertek()
                 ).reversed())
                 .limit(3)
                 .map(Beiratkozas::getHallgato)

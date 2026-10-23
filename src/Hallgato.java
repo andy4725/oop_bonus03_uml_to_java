@@ -24,7 +24,7 @@ public final class Hallgato extends Szemely {
         for(Beiratkozas beiratkozas: beiratkozasok) {
             if(beiratkozas.getJegy().isPresent()) {
                 int kredit = beiratkozas.getKurzus().getKredit();
-                sulyozottOsszeg += beiratkozas.getJegy().get().getErtek() * kredit;
+                sulyozottOsszeg += beiratkozas.getJegy().get().ertek() * kredit;
                 kreditek += kredit;
             }
         }
@@ -34,7 +34,7 @@ public final class Hallgato extends Szemely {
 
     public int getOsszesMegszerzettKredit() {
         return beiratkozasok.stream()
-                .filter(b -> b.getJegy().map(Jegy::sikerek).orElse(false));
+                .filter(b -> b.getJegy().map(Jegy::sikeres).orElse(false))
                 .mapToInt(b -> b.getKurzus().getKredit())
                 .sum();
     }
